@@ -35,7 +35,8 @@ public Main() {
 public void onEnable() {
         if (pluginName != "ParticleKillEffects") {
                 Bukkit.getPluginManager().disablePlugin(this);
-                Bukkit.getConsoleSender().sendMessage(ChatColor.);
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   " +
+                        "你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   ");
         }
         Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+ "================================");
         Bukkit.getConsoleSender().sendMessage(DebugPrefix + ChatColor.GREEN + " 歡迎使用!!");
