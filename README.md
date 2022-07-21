@@ -1,6 +1,5 @@
-# killeffect
+__ParticleKillEffect- Wait Network__ 🍔
 =======
-# __ParticleKillEffect- Wait Network__ 🍔
 - Wait Network Particle Kill Effect -> real shit 💥 
 ##  ***更狗屎的ParticleKillEffect 插件***  
 ### __也許您應該學習編程，而不是請求代碼__ ❤
