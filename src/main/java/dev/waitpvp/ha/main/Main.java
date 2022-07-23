@@ -19,40 +19,35 @@ private static Main plugin;
 private ListenerManger listenerManger;
 private InterfaceEntity interfaceEntity;
 private PluginDescriptionFile pluginInfo;
-private String pluginName = pluginInfo.getName();
-private String pluginAuthor = pluginInfo.getAuthors().toString();
-public String rutaConfig;
-public String DebugPrefix;
-public String CoolGay;
+public final  String DebugPrefix;
+public  String rutaConfig;
 public Main() {
         Main.plugin = this;
         this.DebugPrefix = ChatColor.RED + "[Particle-Kill-Effect]";
-        this.CoolGay = "WaitNetwork-Development";
-        this.listenerManger = new ListenerManger(this);
         }
 
 
 public void onEnable() {
-        if (pluginName != "ParticleKillEffects") {
-                Bukkit.getPluginManager().disablePlugin(this);
-                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   " +
-                        "你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   你尛\n   ");
+        if (!getDescription().getName().equals("ParticleKillEffects")) {
+                if (!getDescription().getAuthors().equals("WaitNetwork-Development")) {
+                        Bukkit.getPluginManager().disablePlugin(this);
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "無法使用插件!");
+                }
         }
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+ "================================");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "§m─────────────────────────────────────");
         Bukkit.getConsoleSender().sendMessage(DebugPrefix + ChatColor.GREEN + " 歡迎使用!!");
-        Bukkit.getConsoleSender().sendMessage(DebugPrefix + ChatColor.AQUA + "版本: §FWaitNetwork Versions -1.8.8 NTUN ASHS");
-        Bukkit.getConsoleSender().sendMessage(DebugPrefix + ChatColor.AQUA + "Creator:" + CoolGay);
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+ "================================");
+        Bukkit.getConsoleSender().sendMessage(DebugPrefix + ChatColor.AQUA + " 版本: §eWaitNetwork Versions -1.8.8 NTUN ASHS");
+        Bukkit.getConsoleSender().sendMessage(DebugPrefix + ChatColor.AQUA + " Creator:" + getDescription().getAuthors() + ChatColor.BOLD + " 雨冬YuDong");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "§m─────────────────────────────────────");
         this.regcmds();
-        this.listenerManger.onload();
         this.regEvents();
         this.regConfig();
 
         }
 public void onDisable(){
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+ "================================");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "§m─────────────────────────────────────");
         Bukkit.getConsoleSender().sendMessage(DebugPrefix +"[擊殺特效]" + ChatColor.RED+ " 已關閉!!");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW+ "================================");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "§m─────────────────────────────────────");
         }
 public InterfaceEntity getEntity(){
         return  this.interfaceEntity;
