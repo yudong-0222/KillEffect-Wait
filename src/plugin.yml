@@ -1,0 +1,8 @@
+name: ParticlesKillEffect
+main: dev.yudong.effectkill.Main
+author: WaitNetwork
+description: A simply effect plugin when Player death. this is so shit
+version: 1.0-SNAPSHOT
+commands:
+  killeffect:
+    aliases: [ke, ek, kille, shit, pke]
