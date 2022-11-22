@@ -12,3 +12,6 @@
 ####   version: 1.8.8-ASHS.NUTN  🍗
 ####   author: WaitNetwork-Development  🙈
 ####   description: Wait Network **獨立開發**版本 不同於RockMiu協作版本。 😁
+
+### 使用方法:
+#### 等待新增
