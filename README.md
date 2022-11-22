@@ -13,4 +13,4 @@
 ####   description: Wait Network **獨立開發**版本 不同於RockMiu協作版本。 😁
 
 ### 使用方法:
-#### 等待新增
+#### [WIKI PAGE](https://github.com/YuDong-0222/KillEffect-Wait/wiki/Tutorial) 來進行配置。
