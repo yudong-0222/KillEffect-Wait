@@ -1,8 +1,7 @@
 # Particle Kill-Effect : Wait Network 🍔
-    
-## Like [Wait Network]'s Particle Kill Effect 💥 
-##  ***更狗屎的Particle Kill Effect 插件*** 相當狗屎    
-### __也許您應該學習編程，而不是請求代碼__ ❤
+  Like [Wait Network]'s Particle Kill Effect 💥     
+  ***更狗屎的Particle Kill Effect 插件*** 相當狗屎    
+## __也許您應該學習編程，而不是請求代碼__ ❤
  - [x] 學習編程式
  - [x] 睡覺
  - [x] 吃飯
