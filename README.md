@@ -1,16 +1,20 @@
 # Particle Kill-Effect : Wait Network 🍔
-  Like [Wait Network]'s Particle Kill Effect 💥     
-  ***更狗屎的Particle Kill Effect 插件*** 相當狗屎    
-## __也許您應該學習編程，而不是請求代碼__ ❤
+*A simply kill effect plugin for Wait Network*   
+
+## Infomations ♦
+####   name: ParticleKillEffects  🥖
+####   plugin-version: 1.8.8-ASHS.NUTN  🍗
+####   server-ver: *1.8.8 +* (1.8 is **BEST**)
+####   author: Wait Network Development Unit  🙈
+####   description: 
+####       Wait Network **獨立開發**版本，不同於[RockMiu基礎版本](https://github.com/yudong-0222/killeffect)。 😁
+####   contents: something simple effect when people dead.
+
+### __也許您應該學習編程，而不是請求代碼__ ❤
  - [x] 學習編程式
  - [x] 睡覺
  - [x] 吃飯
  - [ ] 開啟Minecraft遊玩 🥵
-#### Infomation:
-####   name: ParticleKillEffects  🥖
-####   version: 1.8.8-ASHS.NUTN  🍗
-####   author: WaitNetwork-Development  🙈
-####   description: Wait Network **獨立開發**版本 不同於RockMiu協作版本。 😁
-
+ 
 ### 使用方法:
 #### [WIKI PAGE](https://github.com/YuDong-0222/KillEffect-Wait/wiki/Tutorial) 來進行配置。
