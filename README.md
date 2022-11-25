@@ -2,13 +2,13 @@
 *A simply kill effect plugin for Wait Network*   
 
 ## Infomations ♦
-####   name: ParticleKillEffects  🥖
-####   plugin-version: 1.8.8-ASHS.NUTN  🍗
-####   server-ver: *1.8.8 +* (1.8 is **BEST**)
-####   author: Wait Network Development Unit  🙈
-####   description: 
-####       Wait Network **獨立開發**版本，不同於[RockMiu基礎版本](https://github.com/yudong-0222/killeffect)。 😁
-####   contents: something simple effect when people dead.
+- ####   Name: ParticleKillEffects  🥖
++ ####   Plugin-version: 1.8.8-ASHS.NUTN  🍗
++ ####   Server-ver: *1.8.8 +* (1.8 is **BEST**)
++ ####   Author: Wait Network Development Unit  🙈
++ ####   Wait Network **獨立開發**版本，不同於[RockMiu基礎版本](https://github.com/yudong-0222/killeffect)。 😁
++ ####   Contents: 
+     - [x] something simple effect when people dead.
 
 ### __也許您應該學習編程，而不是請求代碼__ ❤
  - [x] 學習編程式
