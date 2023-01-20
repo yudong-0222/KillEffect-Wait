@@ -7,6 +7,7 @@
 + ####   Server-ver: *1.8.8 +* (1.8 is **BEST**)
 + ####   Author: Wait Network Development Unit  🙈
 + ####   Wait Network **獨立開發**版本，不同於[RockMiu基礎版本](https://github.com/yudong-0222/killeffect)。 😁
++ ####   State: stable (No maintenance in a short time. But if i am free i will update it :+1: )
 + ####   Contents: 
      - [x] something simple effect when people dead.
 
