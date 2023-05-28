@@ -1,5 +1,6 @@
 package dev.yudong.effectkill.event;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -65,7 +66,8 @@ public class Events implements Listener{
 			return;
 		}
 		if (event.getCurrentItem().isSimilar(item)) {
-			event.setCancelled(true);
+			User user = User.getUser(event.getWhoClicked().getUniqueId());
+			user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "already")).replace("%prefix%", Main.prefix)));
 		}
 		if (event.getView().getTitle().equalsIgnoreCase(Utils.colorize((String)Utils.gfc("messages", "menu.effectKill")))) {
 			event.setCancelled(true);
@@ -77,6 +79,7 @@ public class Events implements Listener{
 			User user = User.getUser(event.getWhoClicked().getUniqueId());
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(despawn) && user.getEffectKill() != null) {
 				user.getEffectKill().despawn(user);
+				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%prefix%", Main.prefix)));
 				event.getWhoClicked().closeInventory();
 			}
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(spawn)) {
@@ -98,7 +101,7 @@ public class Events implements Listener{
 					(Utils.colorize(((String) Utils.gfc("messages", "spawn")).replaceAll("%effectname%", ek.getDisplayName()).replaceAll("%prefix%", Main.prefix)));
 					event.getWhoClicked().closeInventory();
 				}else {
-					event.getWhoClicked().sendMessage("�cnull");
+					event.getWhoClicked().sendMessage("cnull");
 				}
 			}
 		}
@@ -117,16 +120,18 @@ public class Events implements Listener{
 	public void onDeath(PlayerDeathEvent event) {
 		if (event.getEntity() instanceof Player) {
 			Player player = event.getEntity().getPlayer();
-			User userDeath = User.getUser(player.getUniqueId());
-			if(Main.getInstance().putEffectKiller) {
-				Player killer = event.getEntity().getKiller();
-				User userKill = User.getUser(killer.getUniqueId());
-				if(userKill.getEffectKill() != null) {
-					userKill.getEffectKill().update(userDeath);					
-				}
-			} else {
-				if(userDeath.getEffectKill() != null) {
-					userDeath.getEffectKill().update(userDeath);
+			if (player.getKiller() != null) {
+				User userDeath = User.getUser(player.getUniqueId());
+				if (Main.getInstance().putEffectKiller) {
+					Player killer = event.getEntity().getKiller();
+					User userKill = User.getUser(killer.getUniqueId());
+					if (userKill.getEffectKill() != null) {
+						userKill.getEffectKill().update(userDeath);
+					}
+				} else {
+					if (userDeath.getEffectKill() != null) {
+						userDeath.getEffectKill().update(userDeath);
+					}
 				}
 			}
 		}

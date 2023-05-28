@@ -57,7 +57,7 @@ public class Main extends JavaPlugin{
 				"§9Give item => §3" + giveItem,
 				"§9Put effect on killer => §3" + putEffectKiller,
 				"",
-				"§7 > Author: §oWaitNetwork",
+				"§7 > Author: §dYuDong",
 				""
 				);
 		prefix = Utils.colorize((String) Utils.gfc("messages", "prefix"));

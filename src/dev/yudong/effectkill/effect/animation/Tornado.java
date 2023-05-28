@@ -18,7 +18,7 @@ import dev.yudong.effectkill.utils.inventory.Heads;
 public class Tornado extends MainEffectKill{
 
 	public Tornado(){
-		super("tornado",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.tornado.name")):("§e龍捲風"), new ArrayList<>(Arrays.asList("&e新圍龍捲風 &a愛情就像龍捲風...!",  "&8左鍵點擊來套用特效")), Heads.TORNADO.getTexture());
+		super("tornado",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.tornado.name")):("§e龍捲風"), new ArrayList<>(Arrays.asList("&e龍捲風 &a愛情就像龍捲風...!",  "&8左鍵點擊來套用特效")), Heads.TORNADO.getTexture());
 	}
 
 	@Override

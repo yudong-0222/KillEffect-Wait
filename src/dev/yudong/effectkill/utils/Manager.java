@@ -1,20 +1,12 @@
 package dev.yudong.effectkill.utils;
 
+import dev.yudong.effectkill.effect.animation.*;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import dev.yudong.effectkill.Main;
 import dev.yudong.effectkill.effect.MainEffectKill;
-import dev.yudong.effectkill.effect.animation.Tornado;
-import dev.yudong.effectkill.effect.animation.DropSoup;
-import dev.yudong.effectkill.effect.animation.FrostFlame;
-import dev.yudong.effectkill.effect.animation.HeadExplode;
-import dev.yudong.effectkill.effect.animation.Heart;
-import dev.yudong.effectkill.effect.animation.Redstone;
-import dev.yudong.effectkill.effect.animation.Satan;
-import dev.yudong.effectkill.effect.animation.Wave;
-import dev.yudong.effectkill.effect.animation.Squid;
 import dev.yudong.effectkill.utils.config.YAMLUtils;
 import dev.yudong.effectkill.utils.inventory.CustomInventory;
 
@@ -43,16 +35,17 @@ public class Manager {
 				if (yaml.getFile().exists()) return;
 				yaml.build("Messages configuration");
 
-				yaml.getConfig().set("prefix", "&b[&cParticleKillEffect&b]");
-				yaml.getConfig().set("no-permission", "%prefix% &c你沒有權限做這個");
+				yaml.getConfig().set("prefix", "&b[&cWaitKillEffect&b]");
+				yaml.getConfig().set("already", "%prefix% &c你已經套用到這個特效了!");
+				yaml.getConfig().set("no-permission", "%prefix% &c你沒有權限!");
 				yaml.getConfig().set("no-player", "%prefix% &c %player% 不存在");
 				yaml.getConfig().set("list-effect", "%prefix% &c該特效 &e%effectname% &c不存在. 這是所有特效列表:&a ");
 				yaml.getConfig().set("remove", "%prefix% &c你移除了你的特效");
 				yaml.getConfig().set("spawn", "%prefix% &e你選擇了 %effectname%");
-				yaml.getConfig().set("menu.effectKill", "&d選擇一個擊殺特效吧!");
+				yaml.getConfig().set("menu.effectKill", "&d選擇一個擊殺特效");
 				yaml.getConfig().set("menu.spawn", "&a套用");
 				yaml.getConfig().set("menu.despawn", "&c取消套用");
-				yaml.getConfig().set("menu.effect", "&f你的特效 -> ");
+				yaml.getConfig().set("menu.effect", "&f你現在使用中的特效 -> ");
 				for (MainEffectKill effectKill : MainEffectKill.instanceList) {
 					yaml.getConfig().set("effectKill."+effectKill.getName()+".name", effectKill.getDisplayName());
 					yaml.getConfig().set("effectKill."+effectKill.getName()+".description", effectKill.getDescription());
@@ -73,7 +66,7 @@ public class Manager {
 				new DropSoup(),
 				new Tornado(),
 				new Redstone(),
-				new HeadExplode()));
+				new DropDiamond()));
 		MainEffectKill.instanceList.forEach(o -> MainEffectKill.effectList.add(o.getClass())); }
 	
 	public Map<String, MainEffectKill> getEffectKills() {

@@ -24,7 +24,7 @@ import dev.yudong.effectkill.utils.maths.MathUtils;
 public class Satan extends MainEffectKill{
 
 	public Satan() {
-		super("satan",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.satan.name")):("§c撒旦"), new ArrayList<>(Arrays.asList("&c撒旦要來囉 &c恐懼圍繞你心中...",   "&8左鍵點擊來套用特效")), Heads.DEVIL.getTexture());
+		super("satan",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.satan.name")):("§c撒旦"), new ArrayList<>(Arrays.asList("&c撒旦的火焰包圍了被擊殺的人的頭顱...",   "&8左鍵點擊來套用特效")), Heads.DEVIL.getTexture());
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class Satan extends MainEffectKill{
 	            Particle.play(loc.clone().add(MathUtils.randomRange(-0.8F, 0.8F), 2.5D, MathUtils.randomRange(-0.8F, 0.8F)), Effect.FLAME); 
 	            Particle.play(loc.clone().add(MathUtils.randomRange(-0.8F, 0.8F), 2.5D, MathUtils.randomRange(0.8F, -0.8F)), Effect.FLAME); 
 	            Particle.play(loc.clone().add(MathUtils.randomRange(-0.8F, 0.8F), 2.5D, MathUtils.randomRange(-0.8F, 0.8F)), Effect.LAVADRIP); 
-	            if(i == 100) {
+	            if(i == 50) {
 					as.remove(armor);
 	            	armor.remove();
 	            	cancel();
