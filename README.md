@@ -2,7 +2,6 @@
 A simple kill effect plugin.    
 Works on 1.8 server    
 
-
 ## Information ♦
 - ####   Name: WaitKillEffect  🥖
 + ####   Plugin-version: 1.1 🍗
