@@ -32,9 +32,9 @@ public class Commands implements CommandExecutor {
                 }
             }
         } else if (!(arg0 instanceof Player)) {
-            arg0.sendMessage("§c--- §CParticleKillEffect §c---");
+            arg0.sendMessage("§c--- §cWaitKillEffect §c---");
             arg0.sendMessage("§a作者: WaitNetwork");
-            arg0.sendMessage("§b版本: 1.0");
+            arg0.sendMessage("§b版本: 1.1");
             arg0.sendMessage("§4用法:");
             arg0.sendMessage("§c/killeffect gui §r: §7打開gui介面.");
             arg0.sendMessage("§c/killeffect remove §7: 移除效果");

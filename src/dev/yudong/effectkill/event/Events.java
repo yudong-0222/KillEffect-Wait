@@ -92,7 +92,7 @@ public class Events implements Listener{
 				MainEffectKill ek = Main.getInstance().getEffectKill().get(name);
 				if (!user.getPlayer().hasPermission(MainEffectKill.getInstance().getPermission())) {
 					user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "no-permission")).replace("%prefix%", Main.prefix)));
-					event.getWhoClicked().closeInventory();
+//					event.getWhoClicked().closeInventory();
 					return;
 				}
 				if(ek!=null) {

@@ -38,7 +38,6 @@ public abstract class MainEffectKill implements Listener{
 	public void despawn(User user) {
 		if (user.getEffectKill() != null) {
 			user.setEffectKill(null);
-			return;
 		}
 	}
 	public abstract void update(User user);
@@ -49,7 +48,7 @@ public abstract class MainEffectKill implements Listener{
 		return name;
 	}
 	public String getPermission() {
-		return "effectkill." + name;
+		return "effectKill." + name;
 	}
 	public String getDisplayName() {
 		return displayName; 
