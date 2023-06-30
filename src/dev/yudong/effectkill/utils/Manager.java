@@ -66,7 +66,9 @@ public class Manager {
 				new DropSoup(),
 				new Tornado(),
 				new Redstone(),
-				new DropDiamond()));
+				new DropDiamond(),
+				new HeadExplode()
+		));
 		MainEffectKill.instanceList.forEach(o -> MainEffectKill.effectList.add(o.getClass())); }
 	
 	public Map<String, MainEffectKill> getEffectKills() {
