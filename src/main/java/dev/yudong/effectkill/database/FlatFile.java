@@ -10,7 +10,7 @@ import dev.yudong.effectkill.effect.MainEffectKill;
 import dev.yudong.effectkill.utils.User;
 
 public class FlatFile{
-	private static File cfgFile = new File("plugins/ParticlesKillEffect/database.yml");
+	private static File cfgFile = new File("plugins/WaitKillEffect/database.yml");
 	private static YamlConfiguration cfg = YamlConfiguration.loadConfiguration(cfgFile);
 	public static void checkDatabase() {
 		if (!cfgFile.exists()) {

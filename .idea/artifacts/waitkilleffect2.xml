@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="waitkilleffect">
-    <output-path>E:/wait 2/.a開這個/plugins</output-path>
+  <artifact type="jar" name="waitkilleffect2">
+    <output-path>E:/wait 2/..testSharkCore/plugins</output-path>
     <root id="archive" name="waitkilleffect.jar">
       <element id="module-output" name=".effect" />
       <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />

@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.yudong.effectkill.Main;

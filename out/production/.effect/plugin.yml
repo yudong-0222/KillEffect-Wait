@@ -1,8 +1,0 @@
-name: WaitKillEffect
-main: dev.yudong.effectkill.Main
-author: YuDong
-description: A simply effect plugin when Player death. this is so shit
-version: 1.1
-commands:
-  killeffect:
-    aliases: [ke, ek, kille, shit, pke]

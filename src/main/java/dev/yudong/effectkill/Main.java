@@ -33,7 +33,7 @@ public class Main extends JavaPlugin{
 		instance = this;
 		manager = new Manager();
 		getServer().getPluginManager().registerEvents(new Events(), this);
-		getCommand("killeffect").setExecutor(new Commands());
+		getCommand("killeffect").setExecutor(new Commands(this));
 		manager.loadMinions();
 		Manager.buildConfigs("config", "messages");
 		FlatFile.checkDatabase();
@@ -48,7 +48,7 @@ public class Main extends JavaPlugin{
 			giveItem = false;
 		}
 		log(
-				"§bParticleKillEffect",
+				"§bWaitKillEffect",
 				"",
 				"§3Loading effect...",
 				" ",

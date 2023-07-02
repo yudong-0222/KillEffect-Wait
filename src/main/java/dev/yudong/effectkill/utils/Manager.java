@@ -67,7 +67,8 @@ public class Manager {
 				new Tornado(),
 				new Redstone(),
 				new DropDiamond(),
-				new HeadExplode()
+				new HeadExplode(),
+				new SnowBa()
 		));
 		MainEffectKill.instanceList.forEach(o -> MainEffectKill.effectList.add(o.getClass())); }
 	
