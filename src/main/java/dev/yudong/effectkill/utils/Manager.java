@@ -37,7 +37,8 @@ public class Manager {
 
 				yaml.getConfig().set("prefix", "&b[&cWaitKillEffect&b]");
 				yaml.getConfig().set("already", "%prefix% &c你已經套用到這個特效了!");
-				yaml.getConfig().set("no-permission", "%prefix% &c你沒有權限!");
+				yaml.getConfig().set("no-permission", "%prefix% &c你沒有權限這麼做");
+				yaml.getConfig().set("no-effect", "%prefix% &c你尚未解鎖這項特效");
 				yaml.getConfig().set("no-player", "%prefix% &c %player% 不存在");
 				yaml.getConfig().set("list-effect", "%prefix% &c該特效 &e%effectname% &c不存在. 這是所有特效列表:&a ");
 				yaml.getConfig().set("remove", "%prefix% &c你移除了你的特效");
@@ -45,7 +46,7 @@ public class Manager {
 				yaml.getConfig().set("menu.effectKill", "&d選擇一個擊殺特效");
 				yaml.getConfig().set("menu.spawn", "&a套用");
 				yaml.getConfig().set("menu.despawn", "&c取消套用");
-				yaml.getConfig().set("menu.effect", "&f你現在使用中的特效 -> ");
+				yaml.getConfig().set("menu.effect", "&e你現在使用中的特效 -> ");
 				for (MainEffectKill effectKill : MainEffectKill.instanceList) {
 					yaml.getConfig().set("effectKill."+effectKill.getName()+".name", effectKill.getDisplayName());
 					yaml.getConfig().set("effectKill."+effectKill.getName()+".description", effectKill.getDescription());
@@ -93,7 +94,6 @@ public class Manager {
 				String itemName = (String) Utils.gfc("messages", "menu.spawn");
 				if (user.getEffectKill() != null && user.getEffectKill().getName().equalsIgnoreCase(effectKills.getName()))
 					itemName = (String) Utils.gfc("messages", "menu.despawn");
-
 				List<String> lores = ((List<String>) Utils.gfc("messages", "effectKill."+effectKills.getName()+".description")).stream().map(Utils::colorize).collect(Collectors.toList());
 				customInventory.addItem(
 						ItemsUtils.create(effectKills.getItemStack(), Utils.colorize(itemName + " " + Utils.gfc("messages", "effectKill."+effectKills.getName()+".name")), lores)

@@ -25,7 +25,7 @@ public class DropDiamond extends MainEffectKill {
     ArrayList<Item> items = new ArrayList<Item>();
 
     public DropDiamond() {
-        super("dropdiamond", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.dropdiamond.name")):("§d鑽石碎落"), new ArrayList<>(Arrays.asList("&b招喚很多鑽石碎片.",  "&8左鍵點擊來套用特效")), Heads.ANGRY.getTexture());
+        super("dropdiamond", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.dropdiamond.name")):("§d鑽石碎落"), new ArrayList<>(Arrays.asList("&b招喚很多鑽石碎片.",  "&8左鍵點擊來套用特效")), Heads.DIAMOND.getTexture());
     }
 
     @Override
@@ -38,6 +38,7 @@ public class DropDiamond extends MainEffectKill {
         }
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable(){
             public void run() {
+
                 for (Item i : items) {
                     Particle.play(i.getLocation(), Effect.COLOURED_DUST);
                     i.remove();

@@ -19,7 +19,7 @@ public class FlatFile{
 			}
 			catch (IOException e) {
 				e.printStackTrace();
-			} 
+			}
 		}
 	}
 	public static void setValue(UUID uuid) {
@@ -28,13 +28,13 @@ public class FlatFile{
 			cfg.set(uuid.toString(), value);
 		} else {
 			cfg.set(uuid.toString(), null);
-		} 
+		}
 		try {
 			cfg.save(cfgFile);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
 	public static void getValue(UUID uuid) {
 		if (cfg.contains(uuid.toString())) {
@@ -42,6 +42,6 @@ public class FlatFile{
 			String ek = cfg.getString(uuid.toString());
 			MainEffectKill m = (MainEffectKill)Main.getInstance().getEffectKill().get(ek);
 			user.setEffectKill(m);
-		} 
+		}
 	}
 }

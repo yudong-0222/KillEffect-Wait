@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.yudong.effectkill.Main;
@@ -28,6 +29,7 @@ public class Tornado extends MainEffectKill{
 			int angle = 0;
 			@Override
 			public void run() {
+				location.getWorld().playSound(location, Sound.ENDERDRAGON_WINGS,0.2f,1f);
 				int max_height = 7;
 				double max_radius = 5;
 				int lines = 5;

@@ -9,6 +9,7 @@ import dev.yudong.effectkill.utils.config.YAMLUtils;
 import dev.yudong.effectkill.utils.inventory.Heads;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 public class SnowBa extends MainEffectKill{
 
 	public SnowBa(){
-		super("snowba",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.snowba.name")):("§e暴風雪"), new ArrayList<>(Arrays.asList("&e暴風雪",  "&8左鍵點擊來套用特效")), Heads.TORNADO.getTexture());
+		super("ea",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.ea.name")):("§f雪花飄飄"), new ArrayList<>(Arrays.asList("&f雪欸花飄飄，北風蕭蕭",  "&8左鍵點擊來套用特效")), Heads.SNOW.getTexture());
 	}
 
 	@Override
@@ -27,6 +28,7 @@ public class SnowBa extends MainEffectKill{
 			int angle = 0;
 			@Override
 			public void run() {
+				location.getWorld().playSound(location, Sound.AMBIENCE_RAIN,0.2f,1f);
 				int max_height = 7;
 				double max_radius = 5;
 				int lines = 10;
