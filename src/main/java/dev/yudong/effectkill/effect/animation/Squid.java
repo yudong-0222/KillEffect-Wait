@@ -3,18 +3,19 @@ package dev.yudong.effectkill.effect.animation;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
+import dev.yudong.effectkill.utils.ParticleEffect;
+import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_8_R3.World;
+import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.yudong.effectkill.Main;
 import dev.yudong.effectkill.effect.MainEffectKill;
-import dev.yudong.effectkill.utils.Particle;
 import dev.yudong.effectkill.utils.User;
 import dev.yudong.effectkill.utils.Utils;
 import dev.yudong.effectkill.utils.config.YAMLUtils;
@@ -25,74 +26,50 @@ public class Squid extends MainEffectKill{
 	public Squid() {
 		super("squid",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.squid.name")):("§3魷魚火箭"), new ArrayList<>(Arrays.asList("&f在原地生成&2魷魚火箭 &e由於魷魚 起飛!",  "&8左鍵點擊來套用特效")), Heads.SQUID.getTexture());
 	}
-
 	@Override
 	public void update(User user) {
-		Location loc = user.getPlayer().getLocation().add(0, -0.3, 0);
+		Location loc = user.getPlayer().getLocation().add(0,-0.3,0);
+		World world = ((CraftWorld) loc.getWorld()).getHandle();
 
-		Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
-			ArmorStand armor = (ArmorStand) loc.getWorld().spawnEntity(loc.add(0, -1, 0), EntityType.ARMOR_STAND);
-			armor.setVisible(false);
-			armor.setGravity(false);
-			Entity e = user.getPlayer().getWorld().spawnEntity(loc, EntityType.SQUID);
-			armor.setPassenger(e);
-			as.add(armor);
+		new BukkitRunnable() {
+			EntitySquid squid;
+			int i = 0;
+			Location lastPos = loc.clone();
+			double verticalSpeed = 0.2; // 上升的垂直速度
 
-			new BukkitRunnable() {
-				int i = 0;
+			@Override
+			public void run() {
+				loc.getWorld().playSound(loc,Sound.CHICKEN_EGG_POP,1f,1f);
+				if (i == 0) {
+					squid = new EntitySquid(world);
+					double initialHeight = loc.getY() + 1.5; // squid出生位置調高
+					squid.setLocation(loc.getX(), initialHeight, loc.getZ(), loc.getYaw() + 90, loc.getPitch());
+					world.addEntity(squid, CreatureSpawnEvent.SpawnReason.CUSTOM);
+				}
 
-				@Override
-				public void run() {
+				Location pos = new Location(loc.getWorld(), squid.locX, squid.locY, squid.locZ);
+				if (pos.getBlock().getType() == Material.AIR) {
+					pos.subtract(0, 0.2, 0); // 起飛? xD
+					ParticleEffect.CLOUD.display(0, 0, 0, 0, 1, pos, 256f); // 显示粒子效果
+					lastPos = pos;
+					squid.motY = verticalSpeed; // 設定往上飛的速度
 					i++;
-					Entity passenger = armor.getPassenger();
-					armor.eject();
-					armor.teleport(armor.getLocation().add(0, 0.5, 0));
-					armor.setPassenger(passenger);
-					Particle.play(armor.getLocation().add(0.0, -0.2, 0.0), Effect.FLAME);
-					user.getPlayer().playSound(loc, Sound.CHICKEN_EGG_POP, 1f, 1f);
-					if (i == 20) {
-						as.remove(armor);
-						armor.remove();
-						e.remove();
-						Particle.play(armor.getLocation().add(0.0, 0.5, 0.0), Effect.EXPLOSION_HUGE, 1);
-						i = 0;
+					if (i >= 25) { // 控制上升的时间
+						squid.dead = true;
+						PacketPlayOutEntityDestroy packetPlayOutEntityDestroy = new PacketPlayOutEntityDestroy(squid.getId()); // 销毁魷魚的包
+						for (Player all : Bukkit.getOnlinePlayers()) {
+							((CraftPlayer) all).getHandle().playerConnection.sendPacket(packetPlayOutEntityDestroy);
+							all.playEffect(lastPos, Effect.EXPLOSION_LARGE, 15);
+						}
 						cancel();
 					}
+				} else {
+					squid.dead = true;
+					cancel();
 				}
-			}.runTaskTimer(Main.getInstance(), 1, 0);
-		});
+			}
+
+		}.runTaskTimer(Main.getInstance(), 1, 1);
 	}
 
-
-//	@Override
-//	public void update(User user) {
-//		Location loc = user.getPlayer().getLocation().add(0, -0.3, 0);
-//		ArmorStand armor = (ArmorStand)loc.getWorld().spawnEntity(loc.add(0, -1, 0), EntityType.ARMOR_STAND);
-//		armor.setVisible(false);
-//		armor.setGravity(false);
-//		Entity e = user.getPlayer().getWorld().spawnEntity(loc, EntityType.SQUID);
-//		armor.setPassenger(e);
-//		as.add(armor);
-//		new BukkitRunnable() {
-//			int i = 0;
-//			@Override
-//			public void run() {
-//				i++;
-//				Entity passenger = armor.getPassenger();
-//				armor.eject();
-//				armor.teleport(armor.getLocation().add(0,0.5,0));
-//				armor.setPassenger(passenger);
-//				Particle.play(armor.getLocation().add(0.0, -0.2, 0.0), Effect.FLAME);
-//				user.getPlayer().playSound(loc, Sound.CHICKEN_EGG_POP, 1f, 1f);
-//				if(i == 20) {
-//					as.remove(armor);
-//					armor.remove();
-//					e.remove();
-//					Particle.play(armor.getLocation().add(0.0, 0.5, 0.0), Effect.EXPLOSION_HUGE, 1);
-//					i = 0;
-//					cancel();
-//				}
-//			}
-//		}.runTaskTimer(Main.getInstance(), 1, 0);
-//	}
 }
