@@ -1,0 +1,7 @@
+name: WaitKillEffect
+version: 1.4-BETA
+main: dev.yudong.effectkill.Main
+author: YuDong
+commands:
+  killeffect:
+    aliases: [ke,pke,wke,ek,shit]
