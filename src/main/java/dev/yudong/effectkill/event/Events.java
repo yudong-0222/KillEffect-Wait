@@ -25,12 +25,12 @@ import dev.yudong.effectkill.utils.config.YAMLUtils;
 public class Events implements Listener{
 
 	private ItemStack item = YAMLUtils.get("config").getFile().exists() ? (ItemsUtils.create(
-			Material.getMaterial((String)Utils.gfc("config", "menu-item.type")), (byte)0, 
+			Material.getMaterial((String)Utils.gfc("config", "menu-item.type")), (byte)0,
 			Utils.colorize((String)Utils.gfc("config", "menu-item.name")), new String[0])):
-				(ItemsUtils.create(
-			Material.getMaterial("NETHER_STAR"), (byte)0, 
-			Utils.colorize("&6&lEffectKill"), new String[0]));
-	
+			(ItemsUtils.create(
+					Material.getMaterial("NETHER_STAR"), (byte)0,
+					Utils.colorize("&6&lEffectKill"), new String[0]));
+
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		if (Main.getInstance().giveItem)
@@ -49,7 +49,7 @@ public class Events implements Listener{
 			event.setCancelled(true);
 	}
 	@EventHandler
-	public void onPickup(PlayerPickupItemEvent event) { 
+	public void onPickup(PlayerPickupItemEvent event) {
 		if (event.getItem().getItemStack() != null && event.getItem().getItemStack().isSimilar(item))
 			event.setCancelled(true);
 	}
@@ -58,7 +58,7 @@ public class Events implements Listener{
 		if (event.getItem() != null && event.getItem().isSimilar(this.item)) {
 			event.setCancelled(true);
 			Main.getManager().buildInventory(User.getUser(event.getPlayer().getUniqueId())).open(new Player[] { event.getPlayer() });
-		} 
+		}
 	}
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
@@ -66,8 +66,7 @@ public class Events implements Listener{
 			return;
 		}
 		if (event.getCurrentItem().isSimilar(item)) {
-			User user = User.getUser(event.getWhoClicked().getUniqueId());
-			user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "already")).replace("%prefix%", Main.prefix)));
+			event.setCancelled(true);
 		}
 		if (event.getView().getTitle().equalsIgnoreCase(Utils.colorize((String)Utils.gfc("messages", "menu.effectKill")))) {
 			event.setCancelled(true);
@@ -79,8 +78,8 @@ public class Events implements Listener{
 			User user = User.getUser(event.getWhoClicked().getUniqueId());
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(despawn) && user.getEffectKill() != null) {
 				user.getEffectKill().despawn(user);
-				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%prefix%", Main.prefix)));
 				event.getWhoClicked().closeInventory();
+				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%prefix%", Main.prefix)));
 			}
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(spawn)) {
 				if (user.getEffectKill() != null) {
@@ -88,53 +87,48 @@ public class Events implements Listener{
 				}
 				String displayName = event.getCurrentItem().getItemMeta().getDisplayName();
 				String name = getEffectByName(displayName);
-				
+
 				MainEffectKill ek = Main.getInstance().getEffectKill().get(name);
-				if (!user.getPlayer().hasPermission(MainEffectKill.getInstance().getPermission())) {
-					user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "no-permission")).replace("%prefix%", Main.prefix)));
-//					event.getWhoClicked().closeInventory();
-					return;
-				}
 				if(ek!=null) {
+					if (!user.getPlayer().hasPermission(ek.getPermission())) {
+						user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "no-effect")).replace("%prefix%", Main.prefix)));
+						return;
+					}
 					user.setEffectKill(ek);
-					event.getWhoClicked().sendMessage
-					(Utils.colorize(((String) Utils.gfc("messages", "spawn")).replaceAll("%effectname%", ek.getDisplayName()).replaceAll("%prefix%", Main.prefix)));
+					event.getWhoClicked().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "spawn")).replaceAll("%effectname%", ek.getDisplayName()).replaceAll("%prefix%", Main.prefix)));
 					event.getWhoClicked().closeInventory();
 				}else {
-					event.getWhoClicked().sendMessage("cnull");
+					event.getWhoClicked().sendMessage("§c請稍後再試一次...若仍是顯示此訊息 請告知服主");
 				}
 			}
 		}
 	}
 
-    public String getEffectByName(String name) {
+	public String getEffectByName(String name) {
 		for (MainEffectKill effectKills : MainEffectKill.instanceList) {
 			String displayname = name.replaceAll(Utils.colorize((String)Utils.gfc("messages", "menu.spawn")) + " ", "");
-        	if (effectKills.getDisplayName().equalsIgnoreCase(displayname)){
-            	return effectKills.getName();
-            }
-        }
+			if (effectKills.getDisplayName().equalsIgnoreCase(displayname)){
+				return effectKills.getName();
+			}
+		}
 		return null;
-    }
+	}
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		if (event.getEntity() instanceof Player) {
 			Player player = event.getEntity().getPlayer();
-			if (player.getKiller() != null) {
-				User userDeath = User.getUser(player.getUniqueId());
-				if (Main.getInstance().putEffectKiller) {
-					Player killer = event.getEntity().getKiller();
-					User userKill = User.getUser(killer.getUniqueId());
-					if (userKill.getEffectKill() != null) {
-						userKill.getEffectKill().update(userDeath);
-					}
-				} else {
-					if (userDeath.getEffectKill() != null) {
-						userDeath.getEffectKill().update(userDeath);
-					}
+			User userDeath = User.getUser(player.getUniqueId());
+			if(Main.getInstance().putEffectKiller) {
+				Player killer = event.getEntity().getKiller();
+				User userKill = User.getUser(killer.getUniqueId());
+				if(userKill.getEffectKill() != null) {
+					userKill.getEffectKill().update(userDeath);
+				}
+			} else {
+				if(userDeath.getEffectKill() != null) {
+					userDeath.getEffectKill().update(userDeath);
 				}
 			}
 		}
-	} 
+	}
 }
-
