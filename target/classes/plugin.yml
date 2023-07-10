@@ -1,5 +1,5 @@
 name: WaitKillEffect
-version: 1.4-BETA
+version: 1.41-BETA
 main: dev.yudong.effectkill.Main
 author: YuDong
 commands:
