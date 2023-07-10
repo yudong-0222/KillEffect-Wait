@@ -2,6 +2,7 @@ package dev.yudong.effectkill.event;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -79,21 +80,24 @@ public class Events implements Listener{
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(despawn) && user.getEffectKill() != null) {
 				user.getEffectKill().despawn(user);
 				event.getWhoClicked().closeInventory();
+				user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.NOTE_SNARE_DRUM,1f,1f);
 				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%prefix%", Main.prefix)));
 			}
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(spawn)) {
-				if (user.getEffectKill() != null) {
-					user.getEffectKill().despawn(user);
-				}
 				String displayName = event.getCurrentItem().getItemMeta().getDisplayName();
 				String name = getEffectByName(displayName);
 
 				MainEffectKill ek = Main.getInstance().getEffectKill().get(name);
 				if(ek!=null) {
 					if (!user.getPlayer().hasPermission(ek.getPermission())) {
+						user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.NOTE_BASS,1f,1f);
 						user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "no-effect")).replace("%prefix%", Main.prefix)));
 						return;
 					}
+					if (user.getEffectKill() != null) {
+						user.getEffectKill().despawn(user);
+					}
+					user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.NOTE_PLING,1f,1f);
 					user.setEffectKill(ek);
 					event.getWhoClicked().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "spawn")).replaceAll("%effectname%", ek.getDisplayName()).replaceAll("%prefix%", Main.prefix)));
 					event.getWhoClicked().closeInventory();
