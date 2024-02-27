@@ -1,4 +1,5 @@
 dev\yudong\effectkill\utils\ParticleEffect$ParticlePacket$VersionIncompatibleException.class
+dev\yudong\effectkill\effect\animation\DropHeads.class
 dev\yudong\effectkill\utils\ItemsUtils.class
 dev\yudong\effectkill\effect\animation\Heart.class
 dev\yudong\effectkill\database\FlatFile.class
@@ -35,7 +36,6 @@ dev\yudong\effectkill\effect\animation\Tornado.class
 dev\yudong\effectkill\utils\Particle.class
 dev\yudong\effectkill\utils\inventory\CustomInventory.class
 dev\yudong\effectkill\utils\config\YAMLUtils.class
-dev\yudong\effectkill\effect\animation\DropDiamond$1.class
 dev\yudong\effectkill\utils\ItemsUtils$ColorData.class
 dev\yudong\effectkill\effect\animation\DropSoup$1.class
 dev\yudong\effectkill\effect\animation\Wave.class

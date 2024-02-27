@@ -31,7 +31,7 @@ public class DropHeads extends MainEffectKill {
     ArrayList<Item> items = new ArrayList<Item>();
 
     public DropHeads() {
-        super("dropfirework", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.dropfirework.name")):("§e§l煙花派對"), new ArrayList<>(Arrays.asList("&6故人西辭黃鶴樓，煙花三月下揚州","§f此為 2023 年 9 月 §a尋找頭顱活動§f獎品",  "&8左鍵點擊來套用特效")), Heads.PRESENT.getTexture());
+        super("dropfirework", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.dropfirework.name")):("§e§l煙花派對"), new ArrayList<>(Arrays.asList("&6故人西辭黃鶴樓，煙花三月下揚州","§f此為 2023 年 9 月 §a尋找頭顱活動 §f獎品",  "&8左鍵點擊來套用特效")), Heads.PRESENT.getTexture());
     }
 
     @Override
