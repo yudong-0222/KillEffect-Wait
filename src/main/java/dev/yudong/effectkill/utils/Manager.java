@@ -68,6 +68,7 @@ public class Manager {
 				new Tornado(),
 				new Redstone(),
 				new DropDiamond(),
+				new DropHeads(),
 				new HeadExplode(),
 				new SnowBa()
 		));

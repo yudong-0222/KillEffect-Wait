@@ -6,7 +6,9 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.material.MaterialData;
+import org.bukkit.material.Skull;
 
 public class ItemFactory{
     public static ItemStack create(Material material, byte data, String displayName, String... lore) {

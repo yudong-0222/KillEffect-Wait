@@ -119,14 +119,16 @@ public class Events implements Listener{
 	}
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
-		if (event.getEntity() instanceof Player) {
+		if (event.getEntity() != null) {
 			Player player = event.getEntity().getPlayer();
 			User userDeath = User.getUser(player.getUniqueId());
 			if(Main.getInstance().putEffectKiller) {
 				Player killer = event.getEntity().getKiller();
-				User userKill = User.getUser(killer.getUniqueId());
-				if(userKill.getEffectKill() != null) {
-					userKill.getEffectKill().update(userDeath);
+				if (killer != null) {
+					User userKill = User.getUser(killer.getUniqueId());
+					if (userKill.getEffectKill() != null) {
+						userKill.getEffectKill().update(userDeath);
+					}
 				}
 			} else {
 				if(userDeath.getEffectKill() != null) {

@@ -36,13 +36,10 @@ public class DropDiamond extends MainEffectKill {
             items.add(ITEM);
             ITEM.setVelocity(new Vector(r.nextDouble() - 0.5D, r.nextDouble() / 2.0D, r.nextDouble() - 0.5D));
         }
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable(){
-            public void run() {
-
-                for (Item i : items) {
-                    Particle.play(i.getLocation(), Effect.COLOURED_DUST);
-                    i.remove();
-                }
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            for (Item i : items) {
+                Particle.play(i.getLocation(), Effect.COLOURED_DUST);
+                i.remove();
             }
         },50L);
     }
