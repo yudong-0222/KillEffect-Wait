@@ -1,8 +1,9 @@
 # User-specific stuff
 .idea/
 /*
-!/RankedSkywars/
 
+target/
+*.properties
 *.iml
 *.ipr
 *.iws
