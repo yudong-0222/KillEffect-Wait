@@ -19,7 +19,6 @@ public class Commands implements CommandExecutor {
             Player player = (Player) arg0;
             if (arg3.length == 0) {
                 player.sendMessage("§C§m---§C §CWaitKillEffect §m---");
-                player.sendMessage("§e作者: YuDong");
                 player.sendMessage("§e版本: " + main.getDescription().getVersion());
                 player.sendMessage("§f指令用法:");
                 player.sendMessage("§c/killeffect gui §r: §7打開gui介面.");
@@ -30,7 +29,6 @@ public class Commands implements CommandExecutor {
             if (arg3.length == 1) {
                 if (arg3[0].equalsIgnoreCase("help")) {
                     player.sendMessage("§C§m---§C §CWaitKillEffect §m---");
-                    player.sendMessage("§e作者: YuDong");
                     player.sendMessage("§e版本: " + main.getDescription().getVersion());
                     player.sendMessage("§f指令用法:");
                     player.sendMessage("§c/killeffect gui §r: §7打開gui介面.");
@@ -52,7 +50,6 @@ public class Commands implements CommandExecutor {
             }
         } else {
             arg0.sendMessage("§c--- §cWaitKillEffect §c---");
-            arg0.sendMessage("§a作者: YuDong");
             arg0.sendMessage("§b版本: " + main.getDescription().getVersion());
             arg0.sendMessage("§4用法:");
             arg0.sendMessage("§c/killeffect gui §r: §7打開gui介面.");
