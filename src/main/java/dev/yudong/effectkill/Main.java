@@ -18,10 +18,11 @@ public class Main extends JavaPlugin{
 	private static Main instance;
 	public static String prefix;
 	private static Manager manager;
-	private Map<String, MainEffectKill> effectkill = new HashMap<>();
+	private final Map<String, MainEffectKill> effectkill = new HashMap<>();
 
 	public boolean putEffectKiller;
 	public boolean giveItem;
+	public static boolean isDebugMode;
 
 	public void log(String... logs) {
 		for (String log : logs)
@@ -32,36 +33,31 @@ public class Main extends JavaPlugin{
 	public void onEnable() {
 		instance = this;
 		manager = new Manager();
+
 		getServer().getPluginManager().registerEvents(new Events(), this);
 		getCommand("killeffect").setExecutor(new Commands(this));
+
 		manager.loadMinions();
+
 		Manager.buildConfigs("config", "messages");
 		FlatFile.checkDatabase();
-		if(((Boolean)Utils.gfc("config", "putEffectKiller")).booleanValue()) {
-			putEffectKiller = true;
-		}else {
-			putEffectKiller = false;
-		}
-		if (((Boolean)Utils.gfc("config", "menu-item.give-on-join")).booleanValue()) {
-			giveItem = true;
-		}else {
-			giveItem = false;
-		}
+
+		putEffectKiller = ((Boolean) Utils.gfc("config", "putEffectKiller")).booleanValue();
+		giveItem = ((Boolean) Utils.gfc("config", "menu-item.give-on-join")).booleanValue();
+
 		log(
 				"§bWaitKillEffect",
 				"",
 				"§3Loading effect...",
 				" ",
 				"§7 > Plugin EffectKill starting...",
-				"",
-				"§9Give item => §3" + giveItem,
-				"§9Put effect on killer => §3" + putEffectKiller,
-				"",
-				"§7 > Author: §dYuDong",
 				""
 				);
 		prefix = Utils.colorize((String) Utils.gfc("messages", "prefix"));
+
 		Bukkit.getOnlinePlayers().forEach(p -> FlatFile.getValue(p.getUniqueId()));
+
+		isDebugMode = false;
 	}
 	@Override
 	public void onDisable() {

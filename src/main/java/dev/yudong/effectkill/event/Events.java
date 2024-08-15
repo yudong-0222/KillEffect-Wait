@@ -1,11 +1,16 @@
 package dev.yudong.effectkill.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Squid;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -25,7 +30,7 @@ import dev.yudong.effectkill.utils.config.YAMLUtils;
 
 public class Events implements Listener{
 
-	private ItemStack item = YAMLUtils.get("config").getFile().exists() ? (ItemsUtils.create(
+	private final ItemStack item = YAMLUtils.get("config").getFile().exists() ? (ItemsUtils.create(
 			Material.getMaterial((String)Utils.gfc("config", "menu-item.type")), (byte)0,
 			Utils.colorize((String)Utils.gfc("config", "menu-item.name")), new String[0])):
 			(ItemsUtils.create(
@@ -117,24 +122,43 @@ public class Events implements Listener{
 		}
 		return null;
 	}
+
+	@EventHandler
+	public void onEntityDamage(EntityDamageEvent e) {
+		if(e.getEntity() instanceof Squid) e.setCancelled(true);
+		if(e.getEntity() instanceof ArmorStand) e.setCancelled(true);
+	}
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		if (event.getEntity() != null) {
 			Player player = event.getEntity().getPlayer();
 			User userDeath = User.getUser(player.getUniqueId());
-			if(Main.getInstance().putEffectKiller) {
-				Player killer = event.getEntity().getKiller();
-				if (killer != null) {
-					User userKill = User.getUser(killer.getUniqueId());
-					if (userKill.getEffectKill() != null) {
-						userKill.getEffectKill().update(userDeath);
+
+			//debug mode
+			if(Main.isDebugMode) {
+				if(player.getKiller() != null) player.getKiller().sendMessage(Main.prefix + "處於 Debug 模式，因此立即重生！");
+				player.sendMessage(Main.prefix + "處於 Debug 模式，因此立即重生！");
+				Bukkit.getScheduler().runTaskLater(Main.getInstance(), ()-> {
+					player.spigot().respawn();
+				},1L);
+
+			}
+
+			Bukkit.getScheduler().runTask(Main.getInstance(), () -> {
+				if (Main.getInstance().putEffectKiller) {
+					Player killer = event.getEntity().getKiller();
+					if (killer != null) {
+						User userKill = User.getUser(killer.getUniqueId());
+						if (userKill.getEffectKill() != null) {
+							userKill.getEffectKill().update(userDeath);
+						}
+					}
+				} else {
+					if (userDeath.getEffectKill() != null) {
+						userDeath.getEffectKill().update(userDeath);
 					}
 				}
-			} else {
-				if(userDeath.getEffectKill() != null) {
-					userDeath.getEffectKill().update(userDeath);
-				}
-			}
+			});
 		}
 	}
 }

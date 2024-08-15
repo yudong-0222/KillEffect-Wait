@@ -48,7 +48,6 @@ dev\yudong\effectkill\effect\animation\FrostFlame.class
 dev\yudong\effectkill\utils\maths\VectorUtils.class
 dev\yudong\effectkill\effect\animation\Tornado$1.class
 dev\yudong\effectkill\effect\animation\SnowBa$1.class
-dev\yudong\effectkill\effect\animation\Squid$1.class
 dev\yudong\effectkill\utils\ParticleEffect$ParticleDataException.class
 dev\yudong\effectkill\effect\animation\SnowBa.class
 dev\yudong\effectkill\effect\animation\HeadExplode$1.class

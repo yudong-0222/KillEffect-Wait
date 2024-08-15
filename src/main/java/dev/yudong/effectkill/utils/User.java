@@ -5,6 +5,8 @@ import com.google.common.collect.Maps;
 import dev.yudong.effectkill.effect.MainEffectKill;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -46,4 +48,15 @@ public class User {
     public static Stream<User> getAllUsers() {
         return users.values().stream();
     }
+    public void playSoundNearby(Player player, Sound sound, float volume, float pitch) {
+        Location playerLocation = player.getLocation();
+        double radius = 5.0;
+
+        for (Player nearbyPlayer : player.getWorld().getPlayers()) {
+            if (nearbyPlayer.getLocation().distance(playerLocation) <= radius) {
+                nearbyPlayer.playSound(nearbyPlayer.getLocation(), sound, volume, pitch);
+            }
+        }
+    }
+
 }
