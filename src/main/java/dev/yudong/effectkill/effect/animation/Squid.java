@@ -18,7 +18,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class Squid extends MainEffectKill{
 //	EntitySquid squid;
-	org.bukkit.entity.Squid squid;
 	private BukkitTask bk;
 	private int i = 0;
 	public Squid() {
@@ -56,7 +55,4 @@ public class Squid extends MainEffectKill{
 			}, 1L, 0L);
 		});
 	}
-
-
-
 }
