@@ -17,7 +17,8 @@ import java.util.Arrays;
 
 public class SnowBa extends MainEffectKill{
 
-	public SnowBa(){
+
+	public SnowBa() {
 		super(
 				"ea",
 				YAMLUtils.get("messages").getFile().exists()
@@ -35,29 +36,48 @@ public class SnowBa extends MainEffectKill{
 	@Override
 	public void update(User user) {
 		Location location = user.getPlayer().getLocation();
+
 		new BukkitRunnable() {
-			int angle = 0;
+			private double rotationAngle = 0; //angle
+			int max_height = 10;
+			int tt = 0;
+			double max_radius = 5;
+			int lines = 10;
+			double height_increment = 0.3;
 			@Override
 			public void run() {
 				location.getWorld().playSound(location, Sound.AMBIENCE_RAIN, 1f, 1f);
-				int max_height = 7;
-				double max_radius = 5;
-				int lines = 10;
-				double height_increment = 0.3;
+
 				double radius_increment = max_radius / max_height;
+
 				for (int l = 0; l < lines; l++) {
 					for (double y = 0; y < max_height; y += height_increment) {
 						double radius = y * radius_increment;
-						double x = Math.cos(Math.toRadians(180 / (lines * l + y * 30 + angle))) * radius;
-						double z = Math.sin(Math.toRadians(180 / (lines * l + y * 30 + angle))) * radius;
+
+						double x = Math.cos(Math.toRadians(rotationAngle)) * radius;
+						double z = Math.sin(Math.toRadians(rotationAngle)) * radius;
+
 						Particle.play(location.clone().add(x, y, z), Effect.SNOW_SHOVEL);
 					}
 				}
-				angle++;
-				if (angle == 70) {
+
+				rotationAngle += 10;
+				if (rotationAngle >= 360) {
+					rotationAngle -= 360; // 保持角度在 0 到 359 度之间
+				}
+
+				tt++;
+				if (tt >= 70) {
 					cancel();
+					//init all var
+					this.rotationAngle = 0;
+					this.max_height = 10;
+					this.max_radius = 5;
+					this.lines = 10;
+					this.height_increment = 0.3;
+					this.tt = 0;
 				}
 			}
-		}.runTaskTimer(Main.getInstance(), 2, 2);
+		}.runTaskTimer(Main.getInstance(), 0, 1);
 	}
 }
