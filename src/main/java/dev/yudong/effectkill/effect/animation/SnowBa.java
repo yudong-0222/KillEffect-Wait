@@ -63,7 +63,7 @@ public class SnowBa extends MainEffectKill{
 
 				rotationAngle += 10;
 				if (rotationAngle >= 360) {
-					rotationAngle -= 360; // 保持角度在 0 到 359 度之间
+					rotationAngle -= 360; //abg
 				}
 
 				tt++;
