@@ -27,7 +27,7 @@ public class Satan extends MainEffectKill{
 		super(
 				"satan",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "effectKill.satan.name")
+						? (String) Utils.gfc("messages", "ek.satan")
 						: "§e撒旦",
 				new ArrayList<>(Arrays.asList(
 						"&f撒旦的火焰包圍了被擊殺的人的頭顱",

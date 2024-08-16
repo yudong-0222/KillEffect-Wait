@@ -22,7 +22,7 @@ public class Tornado extends MainEffectKill{
 		super(
 				"tornado",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "effectKill.tornado.name")
+						? (String) Utils.gfc("messages", "ek.tornado")
 						: "§e龍捲風",
 				new ArrayList<>(Arrays.asList(
 						"&7龍捲風，席捲而來！",

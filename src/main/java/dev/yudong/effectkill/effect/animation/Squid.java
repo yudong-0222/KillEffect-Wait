@@ -24,7 +24,7 @@ public class Squid extends MainEffectKill{
 		super(
 				"squid",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "effectKill.squid.name")
+						? (String) Utils.gfc("messages", "ek.squid")
 						: "§e魷魚火箭",
 				new ArrayList<>(Arrays.asList(
 						"&7生成魷魚火箭，魷魚起飛!",

@@ -29,7 +29,7 @@ public class DropSoup extends MainEffectKill {
         super(
                 "dropsoup",
                 YAMLUtils.get("messages").getFile().exists()
-                        ? ((String) Utils.gfc("messages", "effectKill.dropsoup.name"))
+                        ? ((String) Utils.gfc("messages", "ek.dropsoup"))
                         : "§e湯花奇觀",
                 new ArrayList<>(Arrays.asList(
                         "&7和尚端湯上塔 塔滑湯灑湯燙塔 ",

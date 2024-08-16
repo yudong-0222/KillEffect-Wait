@@ -29,7 +29,7 @@ public class HeadExplode extends MainEffectKill {
         super(
                 "headbomb",
                 YAMLUtils.get("messages").getFile().exists()
-                        ? (String) Utils.gfc("messages", "effectKill.headbomb.name")
+                        ? (String) Utils.gfc("messages", "ek.headbomb")
                         : "§e火箭頭顱",
                 new ArrayList<>(Arrays.asList(
                         "&7頭顱將化身火箭，突破天際！",

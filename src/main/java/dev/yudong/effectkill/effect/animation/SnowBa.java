@@ -20,9 +20,9 @@ public class SnowBa extends MainEffectKill{
 
 	public SnowBa() {
 		super(
-				"ea",
+				"SnowBa",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "effectKill.ea.name")
+						? (String) Utils.gfc("messages", "ek.snowba")
 						: "§e雪花飄飄",
 				new ArrayList<>(Arrays.asList(
 						"&7雪欸花飄飄，北風蕭蕭",

@@ -21,7 +21,7 @@ public class Heart extends MainEffectKill{
 		super(
 				"love",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "effectKill.love.name")
+						? (String) Utils.gfc("messages", "ek.love")
 						: "§e愛心",
 				new ArrayList<>(Arrays.asList(
 						"&7生成愛心粒子效果",

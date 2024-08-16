@@ -20,7 +20,7 @@ public class Redstone extends MainEffectKill{
 		super(
 				"redstone",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "effectKill.redstone.name")
+						? (String) Utils.gfc("messages", "ek.redstone")
 						: "§e血爆",
 				new ArrayList<>(Arrays.asList(
 						"&7就像噴血一般，宣告死亡",
