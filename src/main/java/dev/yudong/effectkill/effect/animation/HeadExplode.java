@@ -26,7 +26,18 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class HeadExplode extends MainEffectKill {
 
     public HeadExplode() {
-        super("headbomb", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.headbomb.name")) : ("§c火箭頭顱"), new ArrayList<>(Arrays.asList("&c點擊套用此特效","&c&lBETA")), Heads.FIREWORK.getTexture());
+        super(
+                "headbomb",
+                YAMLUtils.get("messages").getFile().exists()
+                        ? (String) Utils.gfc("messages", "effectKill.headbomb.name")
+                        : "§e火箭頭顱",
+                new ArrayList<>(Arrays.asList(
+                        "&7頭顱將化身火箭，突破天際！",
+                        "",
+                        "&7稀有度 » &6傳奇"
+                )),
+                Heads.FIREWORK.getTexture()
+        );
     }
 
     @Override
@@ -50,16 +61,16 @@ public class HeadExplode extends MainEffectKill {
             ((CraftPlayer) all).getHandle().playerConnection.sendPacket(packet);
             ((CraftPlayer) all).getHandle().playerConnection.sendPacket(packetPlayOutEntityEquipment);
         }
+        loc.getWorld().playSound(loc, Sound.FIREWORK_LAUNCH, 1f, 1f);
+
         BukkitRunnable runnable = new BukkitRunnable() {
             int i = 20;
             Location lastPos = new Location(loc.getWorld(), entityArmorStand.locX, entityArmorStand.locY, entityArmorStand.locZ);
-
             @SuppressWarnings("deprecation")
             @Override
             public void run() {
                 if (i > 0) {
                     entityArmorStand.locY += 0.5;
-                    loc.getWorld().playSound(loc, Sound.CHICKEN_EGG_POP, 1f, 1f);
                     Location pos = new Location(loc.getWorld(), entityArmorStand.locX, entityArmorStand.locY, entityArmorStand.locZ);
                     if (pos.getBlock().getType() == Material.AIR) {
                         PacketPlayOutEntityHeadRotation packetPlayOutEntityHeadRotation = new PacketPlayOutEntityHeadRotation(
@@ -82,6 +93,7 @@ public class HeadExplode extends MainEffectKill {
                             ((CraftPlayer) all).getHandle().playerConnection.sendPacket(packetPlayOutEntityDestroy);
                             all.playEffect(lastPos, Effect.EXPLOSION_HUGE, 1);
                         }
+                        loc.getWorld().playSound(loc, Sound.EXPLODE, 1f, 1f);
                         cancel();
                     }
                 }

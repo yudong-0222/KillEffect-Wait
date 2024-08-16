@@ -18,7 +18,18 @@ import java.util.Arrays;
 public class SnowBa extends MainEffectKill{
 
 	public SnowBa(){
-		super("ea",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.ea.name")):("§f雪花飄飄"), new ArrayList<>(Arrays.asList("&f雪欸花飄飄，北風蕭蕭",  "&8左鍵點擊來套用特效")), Heads.SNOW.getTexture());
+		super(
+				"ea",
+				YAMLUtils.get("messages").getFile().exists()
+						? (String) Utils.gfc("messages", "effectKill.ea.name")
+						: "§e雪花飄飄",
+				new ArrayList<>(Arrays.asList(
+						"&7雪欸花飄飄，北風蕭蕭",
+						"",
+						"&7稀有度 » &b稀有"
+				)),
+				Heads.SNOW.getTexture()
+		);
 	}
 
 	@Override
@@ -28,25 +39,25 @@ public class SnowBa extends MainEffectKill{
 			int angle = 0;
 			@Override
 			public void run() {
-				location.getWorld().playSound(location, Sound.AMBIENCE_RAIN,0.2f,1f);
+				location.getWorld().playSound(location, Sound.AMBIENCE_RAIN, 1f, 1f);
 				int max_height = 7;
 				double max_radius = 5;
 				int lines = 10;
-				double height_increasement = 0.3;
-				double radius_increasement = max_radius / max_height;
+				double height_increment = 0.3;
+				double radius_increment = max_radius / max_height;
 				for (int l = 0; l < lines; l++) {
-					for (double y = 0; y < max_height; y+=height_increasement ) {
-						double radius = y * radius_increasement;
-						double x = Math.cos(Math.toRadians(180/lines*l + y*30 + angle)) * radius;
-						double z = Math.sin(Math.toRadians(180/lines*l + y*180 *  angle)) * radius;
-						Particle.play(location.clone().add(x,y,z), Effect.SNOW_SHOVEL);
+					for (double y = 0; y < max_height; y += height_increment) {
+						double radius = y * radius_increment;
+						double x = Math.cos(Math.toRadians(180 / (lines * l + y * 30 + angle))) * radius;
+						double z = Math.sin(Math.toRadians(180 / (lines * l + y * 30 + angle))) * radius;
+						Particle.play(location.clone().add(x, y, z), Effect.SNOW_SHOVEL);
 					}
 				}
 				angle++;
-				if(angle == 70) {
+				if (angle == 70) {
 					cancel();
 				}
 			}
-		}.runTaskTimer(Main.getInstance(), 2, 0);
+		}.runTaskTimer(Main.getInstance(), 2, 2);
 	}
 }

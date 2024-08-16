@@ -19,7 +19,19 @@ import dev.yudong.effectkill.utils.inventory.Heads;
 public class FrostFlame extends MainEffectKill{
 
 	public FrostFlame() {
-		super("frostflame", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.frostflame.name")):("§e死之焰"), new ArrayList<>(Arrays.asList("&6死亡之焰在古代是一種魔法結界，如今成了你送走對手的結尾!",  "&8左鍵點擊來套用特效")), Heads.FLAME.getTexture());
+		super(
+				"frostflame",
+				YAMLUtils.get("messages").getFile().exists()
+						? (String) Utils.gfc("messages", "effectKill.frostflame.name")
+						: "§e死亡之焰",
+				new ArrayList<>(Arrays.asList(
+						"&7是失傳已久的古代魔法！",
+						"&7將死去之人的靈魂燒成火焰送往天際！",
+						"",
+						"&7稀有度 » &2史詩"
+				)),
+				Heads.FLAME.getTexture()
+		);
 	}
 
 	@Override

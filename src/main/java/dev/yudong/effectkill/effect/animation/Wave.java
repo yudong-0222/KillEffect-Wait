@@ -19,7 +19,18 @@ import dev.yudong.effectkill.utils.inventory.Heads;
 public class Wave extends MainEffectKill{
 
 	public Wave() {
-		super("wave",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.wave.name")):("§9水世紀"), new ArrayList<>(Arrays.asList("&e一段不為人知的水魔法..",  "&8左鍵點擊來套用特效")), Heads.WAVE.getTexture());
+		super(
+				"wave",
+				YAMLUtils.get("messages").getFile().exists()
+						? (String) Utils.gfc("messages", "effectKill.wave.name")
+						: "§e水之世紀",
+				new ArrayList<>(Arrays.asList(
+						"&7一段不為人知的水魔法...",
+						"",
+						"&7稀有度 » &2史詩"
+				)),
+				Heads.WAVE.getTexture()
+		);
 	}
 
 	@Override

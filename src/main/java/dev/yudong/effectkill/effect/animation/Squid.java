@@ -21,7 +21,18 @@ public class Squid extends MainEffectKill{
 	private BukkitTask bk;
 	private int i = 0;
 	public Squid() {
-		super("squid",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.squid.name")):("§3魷魚火箭"), new ArrayList<>(Arrays.asList("&f在原地生成&2魷魚火箭 &e由於魷魚 起飛!",  "&8左鍵點擊來套用特效")), Heads.SQUID.getTexture());
+		super(
+				"squid",
+				YAMLUtils.get("messages").getFile().exists()
+						? (String) Utils.gfc("messages", "effectKill.squid.name")
+						: "§e魷魚火箭",
+				new ArrayList<>(Arrays.asList(
+						"&7生成魷魚火箭，魷魚起飛!",
+						"",
+						"&7稀有度 » &6傳奇"
+				)),
+				Heads.SQUID.getTexture()
+		);
 	}
 
 	@Override

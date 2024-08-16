@@ -24,7 +24,18 @@ import dev.yudong.effectkill.utils.maths.MathUtils;
 public class Satan extends MainEffectKill{
 
 	public Satan() {
-		super("satan",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.satan.name")):("§c撒旦"), new ArrayList<>(Arrays.asList("&c撒旦的火焰包圍了被擊殺的人的頭顱...",   "&8左鍵點擊來套用特效")), Heads.DEVIL.getTexture());
+		super(
+				"satan",
+				YAMLUtils.get("messages").getFile().exists()
+						? (String) Utils.gfc("messages", "effectKill.satan.name")
+						: "§e撒旦",
+				new ArrayList<>(Arrays.asList(
+						"&f撒旦的火焰包圍了被擊殺的人的頭顱",
+						"",
+						"&7稀有度 » &2史詩"
+				)),
+				Heads.DEVIL.getTexture()
+		);
 	}
 
 	@Override

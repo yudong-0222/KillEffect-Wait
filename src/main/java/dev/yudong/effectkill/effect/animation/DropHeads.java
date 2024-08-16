@@ -31,7 +31,20 @@ public class DropHeads extends MainEffectKill {
     ArrayList<Item> items = new ArrayList<Item>();
 
     public DropHeads() {
-        super("dropfirework", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.dropfirework.name")):("§e§l煙花派對"), new ArrayList<>(Arrays.asList("&6故人西辭黃鶴樓，煙花三月下揚州","§f此為 2023 年 9 月 §a尋找頭顱活動 §f獎品",  "&8左鍵點擊來套用特效")), Heads.PRESENT.getTexture());
+        super(
+                "dropfirework",
+                YAMLUtils.get("messages").getFile().exists() ?
+                        ((String) Utils.gfc("messages", "effectKill.dropfirework.name")) :
+                        ("§e煙花派對"),
+                new ArrayList<>(Arrays.asList(
+                        "&7このはなびは、特別な思い出が詰まっています",
+                        "&7はなびが綺麗だ",
+                        "§7此為 2023 年 9 月 §a尋找頭顱活動 §7獎品",
+                        "",
+                        "&7稀有度 » &6傳奇"
+                )),
+                Heads.PRESENT.getTexture()
+        );
     }
 
     @Override
@@ -40,7 +53,7 @@ public class DropHeads extends MainEffectKill {
         Location loc = p.getLocation();
         p.getWorld().playSound(p.getLocation(), Sound.FIREWORK_LARGE_BLAST, 5f, 1f);
         for (int i = 0; i < 100; i++) {
-            Item ITEM = user.getPlayer().getWorld().dropItem(user.getPlayer().getLocation(), ItemFactory.create(Material.FIREWORK, (byte)0, UUID.randomUUID().toString()));
+            Item ITEM = user.getPlayer().getWorld().dropItem(user.getPlayer().getLocation(), ItemFactory.create(Material.FIREWORK, (byte) 0, UUID.randomUUID().toString()));
             ITEM.setPickupDelay(300);
             items.add(ITEM);
             ITEM.setVelocity(new Vector(r.nextDouble() - 0.5D, r.nextDouble() * 2.0D, r.nextDouble() - 0.5D));
@@ -57,6 +70,6 @@ public class DropHeads extends MainEffectKill {
                 }
                 i.remove();
             }
-        },10L);
+        }, 10L);
     }
 }

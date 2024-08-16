@@ -20,30 +20,40 @@ import dev.yudong.effectkill.utils.Utils;
 import dev.yudong.effectkill.utils.config.YAMLUtils;
 import dev.yudong.effectkill.utils.inventory.Heads;
 
-public class DropSoup extends MainEffectKill{
+public class DropSoup extends MainEffectKill {
 
-	Random r = new Random();
-	ArrayList<Item> items = new ArrayList<Item>();
+    Random r = new Random();
+    ArrayList<Item> items = new ArrayList<Item>();
 
-	public DropSoup() {
-		super("dropsoup", YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.dropsoup.name")):("§e湯品開灑"), new ArrayList<>(Arrays.asList("&a和尚端湯上塔 塔滑湯灑湯燙塔 和尚端塔上湯 湯滑塔灑塔燙湯.",  "&8左鍵點擊來套用特效")), Heads.SOUP.getTexture());
-	}
+    public DropSoup() {
+        super(
+                "dropsoup",
+                YAMLUtils.get("messages").getFile().exists()
+                        ? ((String) Utils.gfc("messages", "effectKill.dropsoup.name"))
+                        : "§e湯花奇觀",
+                new ArrayList<>(Arrays.asList(
+                        "&7和尚端湯上塔 塔滑湯灑湯燙塔 ",
+                        "&7和尚端塔上湯 湯滑塔灑塔燙湯.",
+                        "",
+                        "&7稀有度 » &2罕見"
+                )),
+                Heads.SOUP.getTexture()
+        );
+    }
 
-	@Override
-	public void update(User user) {
-		for (int i = 0; i < 30; i++) {
-			Item ITEM = user.getPlayer().getWorld().dropItem(user.getPlayer().getLocation(), ItemFactory.create(Material.MUSHROOM_SOUP, (byte)0, UUID.randomUUID().toString()));
-			ITEM.setPickupDelay(300);
-			items.add(ITEM);
-			ITEM.setVelocity(new Vector(r.nextDouble() - 0.5D, r.nextDouble() / 2.0D, r.nextDouble() - 0.5D));
-		} 
-		Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable(){
-			public void run() {
-				for (Item i : items) {
-					Particle.play(i.getLocation(), Effect.COLOURED_DUST);
-					i.remove();
-				} 
-			}
-		},50L);
-	}
+    @Override
+    public void update(User user) {
+        for (int i = 0; i < 30; i++) {
+            Item ITEM = user.getPlayer().getWorld().dropItem(user.getPlayer().getLocation(), ItemFactory.create(Material.MUSHROOM_SOUP, (byte) 0, UUID.randomUUID().toString()));
+            ITEM.setPickupDelay(300);
+            items.add(ITEM);
+            ITEM.setVelocity(new Vector(r.nextDouble() - 0.5D, r.nextDouble() / 2.0D, r.nextDouble() - 0.5D));
+        }
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+            for (Item i : items) {
+                Particle.play(i.getLocation(), Effect.COLOURED_DUST);
+                i.remove();
+            }
+        }, 50L);
+    }
 }

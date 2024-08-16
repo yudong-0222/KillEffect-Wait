@@ -13,11 +13,11 @@ import com.google.common.collect.*;
 
 public class CustomInventory implements Listener {
  
-    private static Map<String, CustomInventory> customInventories = Maps.newHashMap();
+    private static final Map<String, CustomInventory> customInventories = Maps.newHashMap();
     private Inventory inventory;
     private JavaPlugin javaPlugin;
     private boolean closable = true;
-    private String inventoryTitle;
+    private final String inventoryTitle;
     private Consumer<InventoryClickEvent> clickEvent = event -> {};
  
     public CustomInventory(JavaPlugin javaPlugin, String inventoryName, boolean save, InventoryHolder inventoryHolder, String inventoryTitle, int inventorySize) {
@@ -146,9 +146,8 @@ public class CustomInventory implements Listener {
         return this;
     }
  
-    public CustomInventory addItem(ItemStack item, int slot) {
+    public void addItem(ItemStack item, int slot) {
         inventory.setItem(slot, item);
-        return this;
     }
  
     public CustomInventory update() {
@@ -157,7 +156,11 @@ public class CustomInventory implements Listener {
         inventory.setContents(content);
         return this;
     }
- 
+
+    public ItemStack getItem(int i) {
+        return inventory.getItem(i);
+    }
+
     public Inventory build() {
         return inventory;
     }

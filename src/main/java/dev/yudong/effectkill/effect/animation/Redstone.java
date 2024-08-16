@@ -17,13 +17,24 @@ import dev.yudong.effectkill.utils.maths.MathUtils;
 public class Redstone extends MainEffectKill{
 
 	public Redstone() {
-		super("redstone",YAMLUtils.get("messages").getFile().exists()?((String) Utils.gfc("messages", "effectKill.redstone.name")):("§4紅石方塊"), new ArrayList<>(Arrays.asList("&4紅石方塊", "&8左鍵點擊來套用特效")), Heads.REDSTONE.getTexture());
+		super(
+				"redstone",
+				YAMLUtils.get("messages").getFile().exists()
+						? (String) Utils.gfc("messages", "effectKill.redstone.name")
+						: "§e血爆",
+				new ArrayList<>(Arrays.asList(
+						"&7就像噴血一般，宣告死亡",
+						"",
+						"&7稀有度 » &b稀有"
+				)),
+				Heads.REDSTONE.getTexture()
+		);
 	}
 
 	@Override
 	public void update(User user) {
 		Location loc = user.getPlayer().getLocation();
-		for (double height = 0.0; height < 1.0; height += 0.8) {
+		for (double height = 1.0; height <= 2.0; height += 0.8) {
 			user.getPlayer().getWorld().playEffect(loc.clone().add((double)MathUtils.randomRange(-1.0f, 1.0f), height, (double)MathUtils.randomRange(-1.0f, 1.0f)), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
 			user.getPlayer().getWorld().playEffect(loc.clone().add((double)MathUtils.randomRange(1.0f, -1.0f), height, (double)MathUtils.randomRange(-1.0f, 1.0f)), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
 		}

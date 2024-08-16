@@ -79,16 +79,21 @@ public class Events implements Listener{
 			if (!event.getCurrentItem().hasItemMeta() || !event.getCurrentItem().getItemMeta().hasDisplayName()) {
 				return;
 			}
+			String current = Utils.colorize((String)Utils.gfc("messages", "menu.effect"));
 			String despawn = Utils.colorize((String)Utils.gfc("messages", "menu.despawn"));
 			String spawn = Utils.colorize((String)Utils.gfc("messages", "menu.spawn"));
 			User user = User.getUser(event.getWhoClicked().getUniqueId());
+
+			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(current) && user.getEffectKill() != null) {
+				user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.CLICK,1f,1f);
+			}
+
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(despawn) && user.getEffectKill() != null) {
 				user.getEffectKill().despawn(user);
 				event.getWhoClicked().closeInventory();
-				user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.NOTE_SNARE_DRUM,1f,1f);
+				user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.DIG_GRAVEL,1f,1f);
 				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%prefix%", Main.prefix)));
-			}
-			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(spawn)) {
+			} else {
 				String displayName = event.getCurrentItem().getItemMeta().getDisplayName();
 				String name = getEffectByName(displayName);
 
@@ -99,15 +104,16 @@ public class Events implements Listener{
 						user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "no-effect")).replace("%prefix%", Main.prefix)));
 						return;
 					}
-					if (user.getEffectKill() != null) {
-						user.getEffectKill().despawn(user);
+					if(user.getEffectKill() == ek) {
+						user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.DIG_WOOD,1f,1f);
+						return;
 					}
+					if (user.getEffectKill() != null) user.getEffectKill().despawn(user);
+
 					user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.NOTE_PLING,1f,1f);
 					user.setEffectKill(ek);
 					event.getWhoClicked().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "spawn")).replaceAll("%effectname%", ek.getDisplayName()).replaceAll("%prefix%", Main.prefix)));
 					event.getWhoClicked().closeInventory();
-				}else {
-					event.getWhoClicked().sendMessage("§c請稍後再試一次...若仍是顯示此訊息 請告知服主");
 				}
 			}
 		}

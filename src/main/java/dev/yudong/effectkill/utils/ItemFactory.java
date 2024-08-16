@@ -1,6 +1,7 @@
 package dev.yudong.effectkill.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -17,10 +18,7 @@ public class ItemFactory{
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(displayName);
         if (lore != null) {
-            List<String> finalLore = new ArrayList<String>();
-            for (final String s : lore) {
-                finalLore.add(s);
-            }
+            List<String> finalLore = new ArrayList<>(Arrays.asList(lore));
             itemMeta.setLore(finalLore);
         }
         itemStack.setItemMeta(itemMeta);
