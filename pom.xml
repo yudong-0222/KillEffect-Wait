@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>WaitKillEffect</artifactId>
-    <version>1.41-ALPHA</version>
+    <version>1.42-ALPHA</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

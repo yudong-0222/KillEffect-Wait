@@ -55,6 +55,7 @@ public class Main extends JavaPlugin{
 		Bukkit.getOnlinePlayers().forEach(p -> FlatFile.getValue(p.getUniqueId()));
 
 		isDebugMode = false;
+		putEffectKiller = true;
 	}
 	@Override
 	public void onDisable() {
