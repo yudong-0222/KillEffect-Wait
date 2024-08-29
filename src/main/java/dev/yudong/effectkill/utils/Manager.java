@@ -24,13 +24,6 @@ public class Manager {
 				YAMLUtils yaml = YAMLUtils.get("config");
 				if (yaml.getFile().exists()) return;
 				yaml.build("This is the base config of EffectKill");
-
-				yaml.getConfig().set("menu-item.give-on-join", false);
-				yaml.getConfig().set("menu-item.slot", 3);
-				yaml.getConfig().set("menu-item.type", "NETHER_STAR");
-				yaml.getConfig().set("menu-item.name", "&6&lEffectKill");
-				yaml.getConfig().set("putEffectKiller", true);
-				yaml.save();
 			} else if (config.equalsIgnoreCase("messages")) {
 				YAMLUtils yaml = YAMLUtils.get("messages");
 				if (yaml.getFile().exists()) return;
@@ -44,11 +37,11 @@ public class Manager {
 				yaml.getConfig().set("no-effect", "%prefix% &c你尚未擁有這項特效");
 				yaml.getConfig().set("no-player", "%prefix% &c %player% 不存在！");
 				yaml.getConfig().set("list-effect", "%prefix% &c該特效 &e%effectname% &c不存在！這是所有特效列表:&a ");
-				yaml.getConfig().set("remove", "%prefix% &c你移除&r %effectname% &c特效！");
-				yaml.getConfig().set("spawn", "%prefix% &e你套用了&r %effectname%！");
+				yaml.getConfig().set("remove", "%prefix% &c你取消套用了擊殺特效 &7» &r %effectname%");
+				yaml.getConfig().set("spawn", "%prefix% &e你套用了擊殺特效 &7»&r %effectname%！");
 				yaml.getConfig().set("menu.effectKill", "&d選擇一個擊殺特效");
 				yaml.getConfig().set("menu.spawn", "&a套用");
-				yaml.getConfig().set("menu.despawn", "&c移除當前特效");
+				yaml.getConfig().set("menu.despawn", "&c移除當前特效 &7» &r %effectname");
 				yaml.getConfig().set("menu.effect", "&e使用中的擊殺特效 &7» &r");
 				for (MainEffectKill effectKill : MainEffectKill.instanceList) {
 					yaml.getConfig().set("effectKill."+effectKill.getName()+".name", effectKill.getDisplayName());

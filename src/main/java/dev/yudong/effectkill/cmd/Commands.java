@@ -23,16 +23,16 @@ public class Commands implements CommandExecutor {
                 player.sendMessage("");
                 player.sendMessage("§c/killeffect gui §7» 打開gui介面.");
                 player.sendMessage("§c/killeffect remove §7» 移除效果");
-                player.sendMessage(player.hasPermission("ek.admin") ? ("§c/killeffect respawn §7» 管理員調試-立即重生") : " ");
+                player.sendMessage(player.hasPermission("ek.admin") ? ("§c/killeffect respawn §7» 管理員調試-立即重生") : "");
                 player.sendMessage(" ");
                 player.sendMessage("§C§m----------------------------------------------------");
             } else if (arg3.length == 1) {
                 if (arg3[0].equalsIgnoreCase("remove")) {
                     User user = User.getUser(player.getUniqueId());
                     if (user.getEffectKill() == null) return true;
+                    player.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replaceAll("%effectname%", user.getEffectKill().getDisplayName()).replaceAll("%prefix%", Main.prefix)));
                     user.getEffectKill().despawn(user);
                     user.setEffectKill(null);
-                    player.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%player%", user.getPlayer().getName()).replace("%prefix%", Main.prefix)));
                 }
                 if (arg3[0].equalsIgnoreCase("gui")) {
                     Main.getManager().buildInventory(User.getUser(player.getUniqueId())).open(player);

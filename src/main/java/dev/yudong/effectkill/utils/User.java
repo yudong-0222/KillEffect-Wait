@@ -33,7 +33,6 @@ public class User {
     }
 
     public void setEffectKill(MainEffectKill effectKill) {
-    	
         this.effectKill = effectKill;
     }
 

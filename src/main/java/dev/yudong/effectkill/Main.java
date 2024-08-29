@@ -42,9 +42,6 @@ public class Main extends JavaPlugin{
 		Manager.buildConfigs("config", "messages");
 		FlatFile.checkDatabase();
 
-		putEffectKiller = ((Boolean) Utils.gfc("config", "putEffectKiller")).booleanValue();
-		giveItem = ((Boolean) Utils.gfc("config", "menu-item.give-on-join")).booleanValue();
-
 		log(
 				"§bWaitKillEffect",
 				"",

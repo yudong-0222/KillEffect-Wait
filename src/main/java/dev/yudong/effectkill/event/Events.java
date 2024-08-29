@@ -30,49 +30,15 @@ import dev.yudong.effectkill.utils.config.YAMLUtils;
 
 public class Events implements Listener{
 
-	private final ItemStack item = YAMLUtils.get("config").getFile().exists() ? (ItemsUtils.create(
-			Material.getMaterial((String)Utils.gfc("config", "menu-item.type")), (byte)0,
-			Utils.colorize((String)Utils.gfc("config", "menu-item.name")), new String[0])):
-			(ItemsUtils.create(
-					Material.getMaterial("NETHER_STAR"), (byte)0,
-					Utils.colorize("&6&lEffectKill"), new String[0]));
-
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
-		if (Main.getInstance().giveItem)
-			event.getPlayer().getInventory().setItem((
-					(Integer)Utils.gfc("config", "menu-item.slot")).intValue(), item);
-		FlatFile.getValue(event.getPlayer().getUniqueId());
-	}
 	@EventHandler
 	public void onQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		FlatFile.setValue(player.getUniqueId());
 	}
 	@EventHandler
-	public void onDrop(PlayerDropItemEvent event) {
-		if (event.getItemDrop().getItemStack() != null && event.getItemDrop().getItemStack().isSimilar(item))
-			event.setCancelled(true);
-	}
-	@EventHandler
-	public void onPickup(PlayerPickupItemEvent event) {
-		if (event.getItem().getItemStack() != null && event.getItem().getItemStack().isSimilar(item))
-			event.setCancelled(true);
-	}
-	@EventHandler
-	public void onInteract(PlayerInteractEvent event) {
-		if (event.getItem() != null && event.getItem().isSimilar(this.item)) {
-			event.setCancelled(true);
-			Main.getManager().buildInventory(User.getUser(event.getPlayer().getUniqueId())).open(new Player[] { event.getPlayer() });
-		}
-	}
-	@EventHandler
 	public void onClick(InventoryClickEvent event) {
 		if (event.getInventory() == null || event.getCurrentItem() == null || event.getWhoClicked() == null) {
 			return;
-		}
-		if (event.getCurrentItem().isSimilar(item)) {
-			event.setCancelled(true);
 		}
 		if (event.getView().getTitle().equalsIgnoreCase(Utils.colorize((String)Utils.gfc("messages", "menu.effectKill")))) {
 			event.setCancelled(true);
@@ -81,7 +47,6 @@ public class Events implements Listener{
 			}
 			String current = Utils.colorize((String)Utils.gfc("messages", "menu.effect"));
 			String despawn = Utils.colorize((String)Utils.gfc("messages", "menu.despawn"));
-			String spawn = Utils.colorize((String)Utils.gfc("messages", "menu.spawn"));
 			User user = User.getUser(event.getWhoClicked().getUniqueId());
 
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(current) && user.getEffectKill() != null) {
@@ -89,15 +54,13 @@ public class Events implements Listener{
 			}
 
 			if (event.getCurrentItem().getItemMeta().getDisplayName().startsWith(despawn) && user.getEffectKill() != null) {
+				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replaceAll("%effectname%", user.getEffectKill().getDisplayName()).replaceAll("%prefix%", Main.prefix)));
 				user.getEffectKill().despawn(user);
 				event.getWhoClicked().closeInventory();
 				user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.DIG_GRAVEL,1f,1f);
-				user.getPlayer().sendMessage(Utils.colorize(((String) Utils.gfc("messages", "remove")).replace("%prefix%", Main.prefix)));
 			} else {
 				String displayName = event.getCurrentItem().getItemMeta().getDisplayName();
-				String name = getEffectByName(displayName);
-
-				MainEffectKill ek = Main.getInstance().getEffectKill().get(name);
+				MainEffectKill ek = Main.getInstance().getEffectKill().get(getEffectName(displayName));
 				if(ek!=null) {
 					if (!user.getPlayer().hasPermission(ek.getPermission())) {
 						user.getPlayer().playSound(user.getPlayer().getLocation(),Sound.NOTE_BASS,1f,1f);
@@ -119,11 +82,12 @@ public class Events implements Listener{
 		}
 	}
 
-	public String getEffectByName(String name) {
+	public String getEffectName(String displayName) {
 		for (MainEffectKill effectKills : MainEffectKill.instanceList) {
-			String displayname = name.replaceAll(Utils.colorize((String)Utils.gfc("messages", "menu.spawn")) + " ", "");
-			if (effectKills.getDisplayName().equalsIgnoreCase(displayname)){
-				return effectKills.getName();
+			if(effectKills.getDisplayName() != null) {
+				if (effectKills.getDisplayName().equalsIgnoreCase(displayName)) {
+					return effectKills.getName();
+				}
 			}
 		}
 		return null;

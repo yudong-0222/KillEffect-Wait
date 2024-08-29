@@ -22,7 +22,7 @@ public class Wave extends MainEffectKill{
 		super(
 				"wave",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "ek.wave")
+						? (String) Utils.gfc("messages", "effectKill.wave.name")
 						: "§e水之世紀",
 				new ArrayList<>(Arrays.asList(
 						"&7一段不為人知的水魔法...",

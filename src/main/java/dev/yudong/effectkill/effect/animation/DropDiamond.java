@@ -23,9 +23,9 @@ public class DropDiamond extends MainEffectKill {
 
     public DropDiamond() {
         super(
-                "dropdiamond",
+                "diamond",
                 YAMLUtils.get("messages").getFile().exists() ?
-                        ((String) Utils.gfc("messages", "ek.dropdiamond")) :
+                        ((String) Utils.gfc("messages", "effectKill.diamond.name")) :
                         ("§e鑽石碎落"),
                 new ArrayList<>(Arrays.asList(
                         "&7招喚散落的鑽石碎片",

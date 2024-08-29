@@ -22,7 +22,7 @@ public class FrostFlame extends MainEffectKill{
 		super(
 				"frostflame",
 				YAMLUtils.get("messages").getFile().exists()
-						? (String) Utils.gfc("messages", "ek.frostflame")
+						? (String) Utils.gfc("messages", "effectKill.frostflame.name")
 						: "§e死亡之焰",
 				new ArrayList<>(Arrays.asList(
 						"&7是失傳已久的古代魔法！",

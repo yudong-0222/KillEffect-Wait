@@ -32,9 +32,9 @@ public class DropHeads extends MainEffectKill {
 
     public DropHeads() {
         super(
-                "dropfirework",
+                "firework",
                 YAMLUtils.get("messages").getFile().exists() ?
-                        ((String) Utils.gfc("messages", "ek.dropfirework")) :
+                        ((String) Utils.gfc("messages", "effectKill.firework.name")) :
                         ("§e煙花派對"),
                 new ArrayList<>(Arrays.asList(
                         "&7このはなびは、特別な思い出が詰まっています",
